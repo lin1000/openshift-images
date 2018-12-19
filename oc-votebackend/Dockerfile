@@ -8,7 +8,7 @@ LABEL maintainer="linic@tw.ibm.com"
 ARG SERVICE_JAR_FILE_NAME=service.jar
 
 # The path to application's jar file 
-ARG SRC_JAR_FILE=target/service.jar
+ARG SRC_JAR_FILE=target/service-1.0.jar
 
 # The application name
 ARG APP_NAME="APP_NAME(NOT PROVIDED)"
