@@ -1,0 +1,75 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftWebConsole
+  creationTimestamp: '2018-12-12T07:30:35Z'
+  generation: 2
+  labels:
+    app: votebackend-001
+  name: votebackend-001
+  namespace: lin1000
+  resourceVersion: '398341'
+spec:
+  replicas: 1
+  selector:
+    deploymentconfig: votebackend-001
+  strategy:
+    activeDeadlineSeconds: 21600
+    resources: {}
+    rollingParams:
+      intervalSeconds: 1
+      maxSurge: 25%
+      maxUnavailable: 25%
+      timeoutSeconds: 600
+      updatePeriodSeconds: 1
+    type: Rolling
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: votebackend-001
+        deploymentconfig: votebackend-001
+    spec:
+      containers:
+        - image: 172.30.1.1:5000/lin1000/votebackend:1.0
+          imagePullPolicy: Always
+          name: votebackend-001
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+            - containerPort: 8443
+              protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  test: false
+status:
+  availableReplicas: 1
+  conditions:
+    - lastTransitionTime: '2018-12-12T07:33:15Z'
+      lastUpdateTime: '2018-12-12T07:33:17Z'
+      message: replication controller "votebackend-001-1" successfully rolled out
+      reason: NewReplicationControllerAvailable
+      status: 'True'
+      type: Progressing
+    - lastTransitionTime: '2018-12-13T10:49:51Z'
+      lastUpdateTime: '2018-12-13T10:49:51Z'
+      message: Deployment config has minimum availability.
+      status: 'True'
+      type: Available
+  details:
+    causes:
+      - type: ConfigChange
+    message: config change
+  latestVersion: 1
+  observedGeneration: 2
+  readyReplicas: 1
+  replicas: 1
+  unavailableReplicas: 0
+  updatedReplicas: 1

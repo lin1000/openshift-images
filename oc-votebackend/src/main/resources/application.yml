@@ -1,0 +1,19 @@
+server:
+   port: 8762
+   
+spring:
+  application:
+    name: votebackend
+
+eureka:
+   instance:   
+      hostname: 192.168.64.4
+      #hostname: localhost      
+      #prefer-ip-address: true
+   client:
+      register-with-eureka: true
+      fetchRegistry: false
+      serviceUrl:
+         deafultZone: http://192.168.64.4:8081/eureka/
+         #defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+         
