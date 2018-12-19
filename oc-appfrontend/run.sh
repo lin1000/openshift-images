@@ -1,0 +1,1 @@
+./docker-build-local.sh && ./docker-run-local.sh && docker logs -f $(basename $(pwd))-local
