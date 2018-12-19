@@ -3,17 +3,21 @@ kind: DeploymentConfig
 metadata:
   annotations:
     openshift.io/generated-by: OpenShiftWebConsole
-  creationTimestamp: '2018-12-12T07:30:35Z'
+  creationTimestamp: '2018-12-13T18:25:30Z'
   generation: 2
   labels:
-    app: votebackend-001
-  name: votebackend-001
+    app: oc-votebackend-1220
+  name: oc-votebackend-1220
   namespace: lin1000
-  resourceVersion: '398341'
+  resourceVersion: '506211'
+  selfLink: >-
+    /apis/apps.openshift.io/v1/namespaces/lin1000/deploymentconfigs/oc-votebackend-1220
+  uid: 78e61b87-ff04-11e8-ad32-6af53d6223a5
 spec:
   replicas: 1
   selector:
-    deploymentconfig: votebackend-001
+    app: oc-votebackend-1220
+    deploymentconfig: oc-votebackend-1220
   strategy:
     activeDeadlineSeconds: 21600
     resources: {}
@@ -26,43 +30,63 @@ spec:
     type: Rolling
   template:
     metadata:
+      annotations:
+        openshift.io/generated-by: OpenShiftWebConsole
       creationTimestamp: null
       labels:
-        app: votebackend-001
-        deploymentconfig: votebackend-001
+        app: oc-votebackend-1220
+        deploymentconfig: oc-votebackend-1220
     spec:
       containers:
-        - image: 172.30.1.1:5000/lin1000/votebackend:1.0
+        - image: >-
+            172.30.1.1:5000/lin1000/oc-votebackend-1220@sha256:ef5ef8e87ce76c1cbb7815ed8f82cbc9cf5ce86fe34ecdc166abc20e25ee8199
           imagePullPolicy: Always
-          name: votebackend-001
+          name: oc-votebackend-1220
           ports:
             - containerPort: 8080
-              protocol: TCP
-            - containerPort: 8443
               protocol: TCP
           resources: {}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /tmp
+              name: oc-votebackend-1220-1
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {}
       terminationGracePeriodSeconds: 30
+      volumes:
+        - emptyDir: {}
+          name: oc-votebackend-1220-1
   test: false
+  triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - oc-votebackend-1220
+        from:
+          kind: ImageStreamTag
+          name: 'oc-votebackend-1220:latest'
+          namespace: lin1000
+        lastTriggeredImage: >-
+          172.30.1.1:5000/lin1000/oc-votebackend-1220@sha256:ef5ef8e87ce76c1cbb7815ed8f82cbc9cf5ce86fe34ecdc166abc20e25ee8199
+      type: ImageChange
 status:
   availableReplicas: 1
   conditions:
-    - lastTransitionTime: '2018-12-12T07:33:15Z'
-      lastUpdateTime: '2018-12-12T07:33:17Z'
-      message: replication controller "votebackend-001-1" successfully rolled out
-      reason: NewReplicationControllerAvailable
-      status: 'True'
-      type: Progressing
-    - lastTransitionTime: '2018-12-13T10:49:51Z'
-      lastUpdateTime: '2018-12-13T10:49:51Z'
+    - lastTransitionTime: '2018-12-13T18:25:36Z'
+      lastUpdateTime: '2018-12-13T18:25:36Z'
       message: Deployment config has minimum availability.
       status: 'True'
       type: Available
+    - lastTransitionTime: '2018-12-13T18:25:37Z'
+      lastUpdateTime: '2018-12-13T18:25:37Z'
+      message: replication controller "oc-votebackend-1220-1" successfully rolled out
+      reason: NewReplicationControllerAvailable
+      status: 'True'
+      type: Progressing
   details:
     causes:
       - type: ConfigChange

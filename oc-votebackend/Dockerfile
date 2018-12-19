@@ -21,6 +21,7 @@ VOLUME /tmp
 
 # Make port 8080 available to the world outside this container
 EXPOSE 8080
+EXPOSE 8762
 
 #Path to deployment root 
 ENV DEPLOYMENT_ROOT /opt
