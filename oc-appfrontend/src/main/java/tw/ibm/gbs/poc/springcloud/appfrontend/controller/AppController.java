@@ -21,7 +21,7 @@ class AppController {
 	public String dashboard() {
 		
 		MongoCredential credential = MongoCredential.createCredential("lin1000", "votedb", "q1w2e3r4".toCharArray());		
-		MongoClient mongoClient = new MongoClient(new ServerAddress("mongodb", 27017),Arrays.asList(credential));
+		MongoClient mongoClient = new MongoClient(new ServerAddress("votedb", 27017),Arrays.asList(credential));
 		MongoDatabase database = mongoClient.getDatabase("votedb");
 		MongoCollection<Document> collection = database.getCollection("vote");
 		
@@ -47,7 +47,7 @@ class AppController {
 	@RequestMapping("/add")
 	public String add() {
 		MongoCredential credential = MongoCredential.createCredential("lin1000", "votedb", "q1w2e3r4".toCharArray());		
-		MongoClient mongoClient = new MongoClient(new ServerAddress("mongodb", 27017),Arrays.asList(credential));
+		MongoClient mongoClient = new MongoClient(new ServerAddress("votedb", 27017),Arrays.asList(credential));
 		MongoDatabase database = mongoClient.getDatabase("votedb");
 		MongoCollection<Document> collection = database.getCollection("vote");
 		
